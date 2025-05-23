@@ -41,7 +41,7 @@ Project ini akan berfokus pada menjawab pertanyaan-pertanyaan bisnis berikut:
 
 1.  Kategori produk apa saja yang memiliki rata-rata nilai *order* tertinggi dan terendah?
 2.  Kategori produk apa saja yang paling sering di-*order* (frekuensi tertinggi) dan paling jarang di-*order*?
-3.  Bagaimana hubungan antara rata-rata nilai *order* dan frekuensi *order* untuk setiap kategori produk? (Misalnya, apakah kategori dengan nilai *order* tinggi cenderung memiliki frekuensi *order* rendah, dan sebaliknya?)
+3.  Bagaimana hubungan antara rata-rata nilai *order* dan frekuensi *order* untuk setiap kategori produk?
 
 **Performa Pengiriman dan Pengaruh Lokasi:**
 
@@ -106,7 +106,7 @@ Data ini bersifat transactional dan direkam secara otomatis dari aplikasi pemesa
 1.  **Pengumpulan Data:** Mengunduh dataset yang relevan.
 2.  **Pembersihan Data:**
     * Mengatasi nilai yang hilang (missing values).
-    * Mengonversi tipe data yang tidak sesuai (misalnya, timestamp ke format tanggal/waktu yang dapat dibaca).
+    * Mengonversi tipe data yang tidak sesuai.
     * Menangani duplikasi data.
 3.  **Rekayasa Fitur (Feature Engineering):**
     * Ekstraksi `order_hour`, `order_day_of_week`, `delivery_duration_minutes`.
@@ -119,7 +119,7 @@ Data ini bersifat transactional dan direkam secara otomatis dari aplikasi pemesa
     * Analisis kategori produk terpopuler dan pola pembelian per toko.
     * Visualisasi persebaran lokasi pelanggan dan toko.
 5.  **Segmentasi Pelanggan (Clustering):**
-    * Menggunakan algoritma *Clustering* (misalnya, K-Means) untuk mengidentifikasi segmen pelanggan berdasarkan perilaku pembelian (waktu order, nilai order, durasi pengiriman, jarak).
+    * Menggunakan algoritma *Clustering* untuk mengidentifikasi segmen pelanggan berdasarkan perilaku pembelian (waktu order, nilai order, durasi pengiriman, jarak).
     * Interpretasi dan profiling masing-masing cluster.
 6.  **Interpretasi dan Rekomendasi:**
     * Menyajikan *insight* utama dari analisis.
@@ -136,55 +136,60 @@ Berikut adalah beberapa *insight* kunci yang ditemukan selama analisis:
 
 * **Korelasi Antara Waktu Pemesanan dengan Frekuensi Order:**
     * **Insight:** Frekuensi *order* menunjukkan korelasi yang jelas dengan waktu pemesanan (jam dalam sehari). Frekuensi *order* memuncak secara signifikan di pagi hari, yaitu antara jam 04:00 hingga 08:00 WIB, dengan puncak tertinggi di sekitar jam 06:00 WIB. Setelah itu, frekuensi menurun drastis hingga siang hari dan mengalami sedikit kenaikan lagi di malam hari (sekitar jam 21:00-23:00 WIB), meskipun tidak setinggi puncak pagi. Frekuensi *order* cenderung meningkat secara signifikan menjelang akhir minggu, dengan puncak tertinggi pada Hari 5 dan Hari 6 (Sabtu dan Minggu). Hari-hari kerja (Hari 0-4) memiliki frekuensi *order* yang lebih stabil dan lebih rendah.
-    * **Penjelasan Grafik:** Grafik ini, kemungkinan adalah *line plot* atau *bar chart* yang menunjukkan jumlah *order* per jam dan per hari dalam seminggu. Puncak di pagi hari (04:00-08:00) dan di akhir pekan (Hari 5 & 6) sangat jelas terlihat, mengindikasikan waktu-waktu tersibuk untuk pemesanan.
-    * ![Frekuensi Order per Jam dan Hari](https://raw.githubusercontent.com/[YOUR_USERNAME]/[YOUR_REPO_NAME]/main/images/frekuensi_order_per_jam_hari.png)
+    * **Penjelasan Grafik:** Grafik ini menunjukkan jumlah *order* per jam dan per hari dalam seminggu. Puncak di pagi hari (04:00-08:00) dan di akhir pekan (Hari 5 & 6) sangat jelas terlihat, mengindikasikan waktu-waktu tersibuk untuk pemesanan.
+      ![Frekuensi Order per Jam dan Hari](https://github.com/nurqoneah/EDA-allofresh/blob/main/download.png)
         Gambar 1. Frekuensi Order berdasarkan Jam dan Hari dalam Seminggu.
 
 * **Distribusi Nilai Order (Transaksi) Pelanggan Allofresh Sepanjang Hari (per Jam):**
     * **Insight:** Distribusi nilai *order* per jam menunjukkan bahwa median nilai *order* cenderung sangat konsisten di sepanjang hari (sekitar Rp 100.000 - Rp 150.000). Tidak ada jam-jam tertentu yang secara signifikan menunjukkan nilai *order* rata-rata (median) yang jauh lebih tinggi atau lebih rendah. Meskipun ada fluktuasi frekuensi *order*, jenis atau nilai pesanan (dari median hingga rentang atas tanpa *outlier*) tidak banyak berubah per jam. Ini mengindikasikan bahwa pelanggan melakukan pembelian dengan nilai yang serupa, terlepas dari jam berapa mereka berbelanja.
-    * **Penjelasan Grafik:** Sebuah *box plot* atau *violin plot* yang membandingkan distribusi nilai *order* untuk setiap jam akan menunjukkan median yang stabil. Hal ini menegaskan bahwa meskipun jumlah pesanan bervariasi, ukuran transaksi individu cenderung konstan.
-    * ![Distribusi Nilai Order per Jam](https://raw.githubusercontent.com/[YOUR_USERNAME]/[YOUR_REPO_NAME]/main/images/distribusi_nilai_order_per_jam.png)
-        Gambar 2. Distribusi Nilai Order per Jam.
+   * **Penjelasan Grafik:** Sebuah *box plot* ini membandingkan distribusi nilai *order* untuk setiap jam, menunjukkan median yang stabil. Hal ini menegaskan bahwa meskipun jumlah pesanan bervariasi, ukuran transaksi individu cenderung konstan.
+      ![Distribusi Nilai Order per Jam](https://github.com/nurqoneah/EDA-allofresh/blob/main/download%20(3).png)
+     Gambar 2. Distribusi Nilai Order per Jam.
 
 * **Distribusi Nilai Order (Transaksi) Pelanggan Allofresh Berdasarkan Hari dalam Seminggu:**
     * **Insight:** Distribusi nilai *order* per jam menunjukkan bahwa median nilai *order* cenderung sangat konsisten di sepanjang minggu. Namun terdapat nilai *order* yang *outlier* di akhir pekan.
-    * **Penjelasan Grafik:** Mirip dengan distribusi per jam, *box plot* atau *violin plot* per hari dalam seminggu akan menampilkan median yang stabil antar hari kerja dan akhir pekan. Adanya *outlier* yang lebih banyak di akhir pekan akan terlihat sebagai titik-titik di luar "jangkar" *box plot*, menunjukkan adanya pesanan dengan nilai sangat tinggi pada hari-hari tersebut.
-    * ![Distribusi Nilai Order per Hari dalam Seminggu](https://raw.githubusercontent.com/[YOUR_USERNAME]/[YOUR_REPO_NAME]/main/images/distribusi_nilai_order_per_hari.png)
-        Gambar 3. Distribusi Nilai Order per Hari dalam Seminggu. 
+    * **Penjelasan Grafik:** Mirip dengan distribusi per jam, *box plot* ini menampilkan median yang stabil antar hari kerja dan akhir pekan. Adanya *outlier* yang lebih banyak di akhir pekan akan terlihat sebagai titik-titik di luar "jangkar" *box plot*, menunjukkan adanya pesanan dengan nilai sangat tinggi pada hari-hari tersebut.
+      ![Distribusi Nilai Order per Hari dalam Seminggu](https://github.com/nurqoneah/EDA-allofresh/blob/main/download%20(2).png)
+      Gambar 3. Distribusi Nilai Order per Hari dalam Seminggu. 
 
 ### **2. Kategori Produk Terpopuler dan Nilai Order:**
 
 * **Kategori Produk dengan Rata-rata Nilai Order Tertinggi dan Terendah:**
     * **Insight:** Rata-rata nilai *order* tertinggi adalah kategori "Other", menunjukkan rata-rata nilai *order* sedikit di atas Rp 200.000. Sedangkan rata-rata nilai *order* terendah adalah kategori "Household", memiliki rata-rata nilai *order* di bawah Rp 100.000 (sekitar Rp 75.000).
-    * **Penjelasan Grafik:** Sebuah *bar chart* yang menampilkan rata-rata nilai `total_value_order` untuk setiap `products_persona_agg` akan dengan jelas menunjukkan perbedaan antara kategori "Other" sebagai yang tertinggi dan "Household" sebagai yang terendah.
-    * ![Rata-rata Nilai Order per Kategori Produk](https://raw.githubusercontent.com/[YOUR_USERNAME]/[YOUR_REPO_NAME]/main/images/rata_rata_nilai_order_per_kategori.png)
-        Gambar 4. Rata-rata Nilai Order per Kategori Produk. 
+   * **Penjelasan Grafik:** Sebuah *bar chart* ini menampilkan rata-rata nilai `total_value_order` untuk setiap `products_persona_agg` akan dengan jelas menunjukkan perbedaan antara kategori "Other" sebagai yang tertinggi dan "Household" sebagai yang terendah.
+      ![Rata-rata Nilai Order per Kategori Produk](https://github.com/nurqoneah/EDA-allofresh/blob/main/download%20(4).png)
+     Gambar 4. Rata-rata Nilai Order per Kategori Produk. 
 
 * **Kategori Produk Paling Sering Diorder (Frekuensi Tertinggi) dan Paling Jarang Diorder:**
     * **Insight:** Berdasarkan analisis frekuensi *order* per kategori produk, terlihat bahwa "sembako" mendominasi daftar teratas sebagai kategori yang paling sering di-*order*, dengan jumlah transaksi yang melampaui 20.000 *order*. Hal ini mengindikasikan bahwa produk kebutuhan pokok merupakan pilar utama volume transaksi bagi bisnis ini, mencerminkan kebutuhan dasar yang sering dipenuhi oleh pelanggan. Di sisi lain, kategori "other" menempati posisi paling bawah dalam hal frekuensi *order*, bahkan hampir tidak terlihat di grafik. Kategori ini diikuti oleh "household" dan "fresh" yang juga menunjukkan frekuensi *order* yang relatif rendah, berkisar antara 4.000 hingga 5.000 *order*. Pola ini menyoroti fokus utama pelanggan pada kebutuhan harian esensial dibandingkan pembelian barang-barang yang mungkin lebih spesifik atau kurang sering dibutuhkan.
-    * **Penjelasan Grafik:** Sebuah *bar chart* yang menunjukkan hitungan (`count`) dari setiap `products_persona_agg` akan memvisualisasikan dominasi "sembako" dan rendahnya frekuensi "other", "household", dan "fresh".
-    * ![Frekuensi Order per Kategori Produk](https://raw.githubusercontent.com/[YOUR_USERNAME]/[YOUR_REPO_NAME]/main/images/frekuensi_order_per_kategori.png)
-        Gambar 5. Frekuensi Order per Kategori Produk. 
+   * **Penjelasan Grafik:** Sebuah *bar chart* ini menunjukkan hitungan (`count`) dari setiap `products_persona_agg` akan memvisualisasikan dominasi "sembako" dan rendahnya frekuensi "other", "household", dan "fresh".
+      ![Frekuensi Order per Kategori Produk](https://github.com/nurqoneah/EDA-allofresh/blob/main/download%20(4).png)
+     Gambar 5. Frekuensi Order per Kategori Produk. 
 
 * **Hubungan Antara Rata-rata Nilai Order dan Frekuensi Order untuk Setiap Kategori Produk:**
     * **Insight:** Terdapat hubungan terbalik yang terlihat jelas antara kategori "other" (nilai *order* tinggi, frekuensi sangat rendah) dan "sembako" (frekuensi sangat tinggi, nilai *order* moderat). Ini menunjukkan bahwa pelanggan cenderung membeli kebutuhan pokok (sembako) dalam jumlah sering dengan nilai transaksi yang tidak terlalu besar per pembelian, sementara pembelian barang dari kategori "other" mungkin lebih jarang namun bernilai tinggi. Kategori "fresh" cenderung rendah di kedua aspek (nilai rata-rata dan frekuensi).
-    * **Penjelasan Grafik:** Sebuah *scatter plot* dengan frekuensi *order* pada sumbu X dan rata-rata nilai *order* pada sumbu Y, dengan label untuk setiap kategori produk, akan secara visual menampilkan posisi relatif setiap kategori dan hubungan terbalik yang dijelaskan.
-    * ![Hubungan Nilai vs Frekuensi Order per Kategori](https://raw.githubusercontent.com/[YOUR_USERNAME]/[YOUR_REPO_NAME]/main/images/hubungan_nilai_frekuensi_kategori.png)
-        Gambar 6. Hubungan Rata-rata Nilai Order dan Frekuensi Order per Kategori Produk.
 
 ### **3. Performa Pengiriman dan Pengaruh Lokasi:**
 
 * **Performa Durasi Pengiriman Keseluruhan (Rata-rata, Median, Distribusi):**
     * **Insight:** Durasi pengiriman rata-rata adalah sekitar 4.43 jam. Distribusi durasi pengiriman miring ke kanan (*positively skewed*). Ini berarti sebagian besar pengiriman diselesaikan dalam waktu yang relatif singkat (di bawah 5 jam), namun ada juga pengiriman yang memakan waktu lebih lama.
-    * **Penjelasan Grafik:** Sebuah histogram atau *density plot* dari kolom `delivery_duration_hours` akan menunjukkan bentuk distribusi yang miring ke kanan, dengan puncak di sekitar 4-5 jam dan ekor panjang ke arah durasi yang lebih lama.
-    * ![Distribusi Durasi Pengiriman](https://raw.githubusercontent.com/[YOUR_USERNAME]/[YOUR_REPO_NAME]/main/images/distribusi_durasi_pengiriman.png)
-        Gambar 7. Distribusi Durasi Pengiriman. 
+   * **Penjelasan Grafik:** Sebuah histogram ini dari kolom `delivery_duration_hours` akan menunjukkan bentuk distribusi yang miring ke kanan, dengan puncak di sekitar 4-5 jam dan ekor panjang ke arah durasi yang lebih lama.
+     ![Distribusi Durasi Pengiriman](https://github.com/nurqoneah/EDA-allofresh/blob/main/download%20(8).png)
+  Gambar 6. Distribusi Durasi Pengiriman. 
 
 * **Perbedaan Durasi Pengiriman Berdasarkan Jarak Pengiriman atau Wilayah/Lokasi Pelanggan:**
     * **Insight:** Grafik "Delivery Duration vs Distance" menunjukkan korelasi positif yang jelas antara jarak pengiriman dan durasi pengiriman. Semakin jauh jaraknya, durasi pengiriman cenderung semakin lama. Namun, ada variabilitas yang signifikan; untuk jarak yang sama, durasi pengiriman bisa sangat bervariasi, menunjukkan faktor lain ikut berperan seperti kepadatan lalu lintas yang lebih tinggi di kota-kota padat seperti di Jakarta.
-    * **Penjelasan Grafik:** *Scatter plot* dengan `delivery_distance_km` pada sumbu X dan `delivery_duration_hours` pada sumbu Y akan menunjukkan pola titik-titik yang naik dari kiri bawah ke kanan atas, mengonfirmasi korelasi positif. Namun, penyebaran titik-titik di sekitar tren menunjukkan variabilitas yang disebabkan oleh faktor-faktor lain.
-    * ![Durasi Pengiriman vs Jarak](https://raw.githubusercontent.com/[YOUR_USERNAME]/[YOUR_REPO_NAME]/main/images/durasi_pengiriman_vs_jarak.png)
-        Gambar 8. Durasi Pengiriman vs Jarak. 
+    * **Penjelasan Grafik:** *Scatter plot* ini dengan `delivery_distance_km` pada sumbu X dan `delivery_duration_hours` pada sumbu Y akan menunjukkan pola titik-titik yang naik dari kiri bawah ke kanan atas, mengonfirmasi korelasi positif. Namun, penyebaran titik-titik di sekitar tren menunjukkan variabilitas yang disebabkan oleh faktor-faktor lain.
+      ![Durasi Pengiriman vs Jarak](https://github.com/nurqoneah/EDA-allofresh/blob/main/download%20(1).png)
+  Gambar 7. Durasi Pengiriman vs Jarak.
+
+* **Persebaran Lokasi Toko dan Pelanggan:**
+    * **Insight:** Mayoritas lokasi toko dan pelanggan terkonsentrasi di wilayah Jabodetabek. Hal ini mengindikasikan bahwa operasional Allofresh saat ini berfokus pada area metropolitan yang padat penduduk, yang juga menjelaskan mengapa kepadatan lalu lintas menjadi faktor signifikan dalam durasi pengiriman.
+    * **Penjelasan Grafik:** Peta persebaran geografis yang menampilkan titik-titik lokasi toko dan titik-titik lokasi pelanggan akan secara visual menunjukkan klasterisasi di wilayah Jabodetabek. 
+      ![Persebaran Lokasi Toko dan Pelanggan](https://github.com/nurqoneah/EDA-allofresh/blob/main/newplot%20(30).png)
+      ![Persebaran Lokasi Toko dan Pelanggan](https://github.com/nurqoneah/EDA-allofresh/blob/main/newplot%20(31).png)
+
+       Gambar 8. Persebaran Lokasi Toko dan Pelanggan
 
 ### **4. Perilaku Pengiriman dan Kluster Pelanggan:**
 
@@ -204,8 +209,9 @@ Berikut adalah beberapa *insight* kunci yang ditemukan selama analisis:
         * **Karakteristik:** Segmen ini memiliki nilai *order* tertinggi (rata-rata sekitar Rp 299.000) dan juga memesan pada pagi hari. Jarak pengirimannya sedang.
         * **Insight:** Kluster ini kemungkinan besar terdiri dari pelanggan yang melakukan pembelian dalam jumlah besar, seperti untuk stok bulanan atau keperluan bisnis kecil.
         * **Penjelasan Profil:** Profil *cluster* ini akan ditunjukkan melalui nilai rata-rata atau median dari fitur-fitur yang sama untuk *cluster* 2.
-    * ![Profil Karakteristik Cluster Pelanggan](https://raw.githubusercontent.com/[YOUR_USERNAME]/[YOUR_REPO_NAME]/main/images/profil_cluster_pelanggan.png)
-        Gambar 10. Profil Karakteristik Setiap Cluster Pelanggan. 
+      ![Profil Karakteristik Cluster Pelanggan](https://github.com/nurqoneah/EDA-allofresh/blob/main/download%20(7).png)
+
+      Gambar 9. Profil Karakteristik Setiap Cluster Pelanggan. 
 
 ---
 
